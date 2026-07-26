@@ -1,6 +1,14 @@
 <ion-header class="app-header">
   <ion-toolbar>
     <ion-title>Weather App</ion-title>
+    <div class="theme-control" slot="end">
+      <span id="dark-mode-label">Dark mode</span>
+      <ion-toggle
+        aria-labelledby="dark-mode-label"
+        [checked]="isDarkMode"
+        (ionChange)="setDarkMode($event.detail.checked)">
+      </ion-toggle>
+    </div>
   </ion-toolbar>
 </ion-header>
 

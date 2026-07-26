@@ -15,6 +15,7 @@ import {
   IonCardContent,
   IonIcon,
   IonSpinner,
+  IonToggle,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { partlySunnyOutline } from 'ionicons/icons';
@@ -28,7 +29,6 @@ import {
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
   imports: [
     IonHeader,
     IonToolbar,
@@ -42,11 +42,13 @@ import {
     IonCardContent,
     IonIcon,
     IonSpinner,
+    IonToggle,
     FormsModule,
     NgIf,
   ],
 })
 export class HomePage implements OnInit {
+  private readonly themeStorageKey = 'weather-app-dark-mode';
   private readonly weather = inject(Weather);
 
   city = 'Toronto';
@@ -54,9 +56,11 @@ export class HomePage implements OnInit {
   weatherData?: CurrentWeather;
   isLoading = false;
   errorMessage = '';
+  isDarkMode = false;
 
   constructor() {
     addIcons({ partlySunnyOutline });
+    this.restoreThemePreference();
   }
 
   ngOnInit(): void {
@@ -70,6 +74,20 @@ export class HomePage implements OnInit {
 
     this.city = city;
     this.loadWeather();
+  }
+
+  setDarkMode(enabled: boolean): void {
+    this.isDarkMode = enabled;
+    document.documentElement.classList.toggle('ion-palette-dark', enabled);
+    localStorage.setItem(this.themeStorageKey, String(enabled));
+  }
+
+  private restoreThemePreference(): void {
+    const savedPreference = localStorage.getItem(this.themeStorageKey);
+    this.isDarkMode = savedPreference === null
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+      : savedPreference === 'true';
+    document.documentElement.classList.toggle('ion-palette-dark', this.isDarkMode);
   }
 
   loadWeather(): void {

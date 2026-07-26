@@ -10,6 +10,7 @@ Weather App is a focused Ionic and Angular demo that searches for a city and dis
 - City search by button or Enter key
 - Current temperature, humidity, wind speed, and readable condition
 - Loading state, duplicate-request prevention, and friendly error messages
+- Light/dark theme toggle with saved and system preferences
 - Responsive, keyboard-accessible Ionic interface
 
 ## Technology stack
