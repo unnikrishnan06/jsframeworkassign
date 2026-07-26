@@ -10,6 +10,8 @@ describe('HomePage', () => {
   let weather: jasmine.SpyObj<Weather>;
 
   beforeEach(async () => {
+    localStorage.clear();
+    document.documentElement.classList.remove('ion-palette-dark');
     weather = jasmine.createSpyObj<Weather>('Weather', ['searchCity', 'getWeather']);
     weather.searchCity.and.returnValue(of({
       results: [{
@@ -63,5 +65,29 @@ describe('HomePage', () => {
 
     expect(component.city).toBe('Barrie');
     expect(weather.searchCity).toHaveBeenCalledOnceWith('Barrie');
+  });
+
+  it('should toggle dark mode and save the preference', () => {
+    component.setDarkMode(true);
+
+    expect(component.isDarkMode).toBeTrue();
+    expect(document.documentElement.classList.contains('ion-palette-dark')).toBeTrue();
+    expect(localStorage.getItem('weather-app-dark-mode')).toBe('true');
+
+    component.setDarkMode(false);
+
+    expect(document.documentElement.classList.contains('ion-palette-dark')).toBeFalse();
+    expect(localStorage.getItem('weather-app-dark-mode')).toBe('false');
+  });
+
+  it('should restore a saved dark mode preference', () => {
+    fixture.destroy();
+    localStorage.setItem('weather-app-dark-mode', 'true');
+
+    fixture = TestBed.createComponent(HomePage);
+    component = fixture.componentInstance;
+
+    expect(component.isDarkMode).toBeTrue();
+    expect(document.documentElement.classList.contains('ion-palette-dark')).toBeTrue();
   });
 });

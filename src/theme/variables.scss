@@ -1,2 +1,40 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  --weather-page-background: linear-gradient(#e5f4ff, #fff);
+  --weather-header-start: #063d73;
+  --weather-header-end: #075aa8;
+  --weather-accent: #075aa8;
+  --weather-heading: #063d73;
+  --weather-text: #172b3a;
+  --weather-muted: #496477;
+  --weather-surface: #fff;
+  --weather-input: #f4f9fd;
+  --weather-temperature: #e9f5ff;
+  --weather-border: #c7e1f5;
+  --weather-detail-border: #d8e8f3;
+  --weather-error-background: #fff1f0;
+  --weather-error-border: #b42318;
+  --weather-error-text: #791f18;
+  --weather-focus: #f0b429;
+}
+
+.ion-palette-dark {
+  --weather-page-background: linear-gradient(#071521, #0e2231);
+  --weather-header-start: #061827;
+  --weather-header-end: #0b4d78;
+  --weather-accent: #69bff5;
+  --weather-heading: #d7efff;
+  --weather-text: #edf7ff;
+  --weather-muted: #b5cddd;
+  --weather-surface: #132c3d;
+  --weather-input: #1b3a4f;
+  --weather-temperature: #173d57;
+  --weather-border: #35617b;
+  --weather-detail-border: #416c84;
+  --weather-error-background: #451d22;
+  --weather-error-border: #ff8b82;
+  --weather-error-text: #ffd7d3;
+  --weather-focus: #ffd166;
+}
