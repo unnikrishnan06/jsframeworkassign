@@ -18,7 +18,6 @@ Weather App is a focused Ionic and Angular demo that searches for a city and dis
 - Angular 20 with standalone components
 - TypeScript and SCSS
 - Angular HttpClient and RxJS
-- Capacitor
 - Open-Meteo APIs
 
 Ionic supplies the mobile-friendly interface components and application shell. Angular supplies component state, templates, dependency injection, routing, forms, and HTTP communication.
@@ -114,14 +113,14 @@ The search controls have accessible labels and visible keyboard focus. Loading u
 
 ## Deployment
 
-Future live URL: `<deployment-url>`
+Future live URL: `https://ionic-weather-app.onrender.com/home`
 
 ## Team
 
-- Team member 1: `<name and role>`
-- Team member 2: `<name and role>`
-- Team member 3: `<name and role>`
+- Team member 1: `Alen Thomas`
+- Team member 2: `Unnikrishnan Satheeshkumar`
+- Team member 3: `Vaishnav Vijayan`
+- Team member 4: `Aqwin Valath Vinod`
+- Team member 5: `Alice Poudel`
+- Team member 6: `Alphin Xavier`
 
-## Academic use
-
-This project is an educational demonstration. Follow your institution's academic-integrity requirements when studying, adapting, or submitting this work.
