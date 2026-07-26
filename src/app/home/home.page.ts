@@ -63,6 +63,15 @@ export class HomePage implements OnInit {
     this.loadWeather();
   }
 
+  selectQuickCity(city: string): void {
+    if (this.isLoading) {
+      return;
+    }
+
+    this.city = city;
+    this.loadWeather();
+  }
+
   loadWeather(): void {
     if (this.isLoading) {
       return;

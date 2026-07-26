@@ -32,6 +32,30 @@
         Search
       </ion-button>
 
+      <div class="ion-margin-top" role="group" aria-label="Quick cities">
+        <strong>Quick cities</strong>
+        <ion-button
+          class="quick-city"
+          size="small"
+          [fill]="location?.name === 'Toronto' ? 'solid' : 'outline'"
+          [disabled]="isLoading"
+          [attr.aria-pressed]="location?.name === 'Toronto'"
+          aria-label="Load Toronto weather"
+          (click)="selectQuickCity('Toronto')">
+          Toronto
+        </ion-button>
+        <ion-button
+          class="quick-city"
+          size="small"
+          [fill]="location?.name === 'Barrie' ? 'solid' : 'outline'"
+          [disabled]="isLoading"
+          [attr.aria-pressed]="location?.name === 'Barrie'"
+          aria-label="Load Barrie weather"
+          (click)="selectQuickCity('Barrie')">
+          Barrie
+        </ion-button>
+      </div>
+
       <div
         *ngIf="isLoading"
         class="status-message"
