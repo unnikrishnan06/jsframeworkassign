@@ -14,7 +14,7 @@ Weather App is a focused Ionic and Angular demo that searches for a city and dis
 
 ## Technology stack
 
-- Ionic 8
+- Ionic 7.2
 - Angular 20 with standalone components
 - TypeScript and SCSS
 - Angular HttpClient and RxJS
