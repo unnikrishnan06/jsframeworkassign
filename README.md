@@ -114,14 +114,14 @@ The search controls have accessible labels and visible keyboard focus. Loading u
 
 ## Deployment
 
-Future live URL: `<deployment-url>`
+Future live URL: `https://ionic-weather-app.onrender.com/home`
 
 ## Team
 
-- Team member 1: `<name and role>`
-- Team member 2: `<name and role>`
-- Team member 3: `<name and role>`
+- Team member 1: `Alen Thomas`
+- Team member 2: `Unnikrishnan Satheeshkumar`
+- Team member 3: `Vaishnav Vijayan`
+- Team member 4: `Aqwin Valath Vinod`
+- Team member 5: `Alice Poudel`
+- Team member 6: `Alphin Xavier`
 
-## Academic use
-
-This project is an educational demonstration. Follow your institution's academic-integrity requirements when studying, adapting, or submitting this work.
