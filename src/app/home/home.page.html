@@ -10,20 +10,19 @@
     placeholder="Search for a city">
   </ion-searchbar>
 
-  <ion-button expand="block">
+  <ion-button expand="block" (click)="loadWeather()">
     Search
   </ion-button>
 
-  <ion-card>
+  <ion-card *ngIf="weatherData">
     <ion-card-header>
       <ion-card-title>Toronto</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <h2>🌡 24°C</h2>
-      <p>☁ Cloudy</p>
-      <p>💧 Humidity: 60%</p>
-      <p>🌬 Wind: 15 km/h</p>
+      <h2>🌡 {{ weatherData.temperature_2m }}°C</h2>
+      <p>💧 Humidity: {{ weatherData.relative_humidity_2m }}%</p>
+      <p>🌬 Wind: {{ weatherData.wind_speed_10m }} km/h</p>
     </ion-card-content>
   </ion-card>
 
