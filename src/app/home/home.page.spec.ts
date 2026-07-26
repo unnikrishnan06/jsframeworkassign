@@ -55,4 +55,13 @@ describe('HomePage', () => {
     expect(weather.searchCity).not.toHaveBeenCalled();
     expect(component.errorMessage).toBe('Please enter a city name.');
   });
+
+  it('should immediately search when Barrie is selected', () => {
+    weather.searchCity.calls.reset();
+
+    component.selectQuickCity('Barrie');
+
+    expect(component.city).toBe('Barrie');
+    expect(weather.searchCity).toHaveBeenCalledOnceWith('Barrie');
+  });
 });
