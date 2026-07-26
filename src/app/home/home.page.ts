@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EMPTY, finalize, map, switchMap } from 'rxjs';
 import {
   IonHeader,
   IonToolbar,
@@ -11,8 +12,12 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
+  IonIcon,
+  IonSpinner,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { partlySunnyOutline } from 'ionicons/icons';
 
 import {
   CurrentWeather,
@@ -35,6 +40,8 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    IonIcon,
+    IonSpinner,
     FormsModule,
     NgIf,
   ],
@@ -43,29 +50,57 @@ export class HomePage implements OnInit {
   city = 'Toronto';
   location?: GeocodingResult;
   weatherData?: CurrentWeather;
+  isLoading = false;
+  errorMessage = '';
 
-  constructor(private weather: Weather) {}
+  constructor(private weather: Weather) {
+    addIcons({ partlySunnyOutline });
+  }
 
   ngOnInit(): void {
     this.loadWeather();
   }
 
   loadWeather(): void {
-    const city = this.city.trim();
-    if (!city) {
+    if (this.isLoading) {
       return;
     }
 
-    this.weather.searchCity(city).subscribe((geocodingData) => {
-      const location = geocodingData.results?.[0];
-      if (!location) {
-        return;
-      }
+    const city = this.city.trim();
+    if (!city) {
+      this.errorMessage = 'Please enter a city name.';
+      return;
+    }
 
-      this.weather.getWeather(location.latitude, location.longitude).subscribe((weatherData) => {
+    this.errorMessage = '';
+    this.isLoading = true;
+
+    this.weather.searchCity(city).pipe(
+      switchMap((geocodingData) => {
+        const location = geocodingData.results?.[0];
+        if (!location) {
+          this.errorMessage = `We couldn't find "${city}". Please try another city.`;
+          return EMPTY;
+        }
+
+        return this.weather.getWeather(location.latitude, location.longitude).pipe(
+          map((weatherData) => ({
+            location,
+            currentWeather: weatherData.current,
+          })),
+        );
+      }),
+      finalize(() => {
+        this.isLoading = false;
+      }),
+    ).subscribe({
+      next: ({ location, currentWeather }) => {
         this.location = location;
-        this.weatherData = weatherData.current;
-      });
+        this.weatherData = currentWeather;
+      },
+      error: () => {
+        this.errorMessage = 'Weather data is unavailable right now. Please check your connection and try again.';
+      },
     });
   }
 

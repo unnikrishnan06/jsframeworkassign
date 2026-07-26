@@ -1,32 +1,81 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="app-header">
+  <ion-toolbar>
     <ion-title>Weather App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
+  <main class="weather-page">
+    <section class="intro" aria-labelledby="search-heading">
+      <ion-icon name="partly-sunny-outline" aria-hidden="true"></ion-icon>
+      <div>
+        <h1 id="search-heading">Check the weather</h1>
+        <p>Search for current conditions in any city.</p>
+      </div>
+    </section>
 
-  <ion-searchbar
-    placeholder="Search for a city"
-    [(ngModel)]="city"
-    (keyup.enter)="loadWeather()">
-  </ion-searchbar>
+    <section class="search-panel" aria-label="City weather search">
+      <ion-searchbar
+        aria-label="City name"
+        placeholder="Enter a city"
+        [(ngModel)]="city"
+        [disabled]="isLoading"
+        (keyup.enter)="loadWeather()">
+      </ion-searchbar>
 
-  <ion-button expand="block" (click)="loadWeather()">
-    Search
-  </ion-button>
+      <ion-button
+        class="search-button"
+        expand="block"
+        aria-label="Search for city weather"
+        [disabled]="isLoading"
+        (click)="loadWeather()">
+        Search
+      </ion-button>
 
-  <ion-card *ngIf="weatherData && location">
-    <ion-card-header>
-      <ion-card-title>{{ location.name }}, {{ location.country }}</ion-card-title>
-    </ion-card-header>
+      <div
+        *ngIf="isLoading"
+        class="status-message"
+        role="status"
+        aria-live="polite">
+        <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
+        <span>Getting current weather…</span>
+      </div>
 
-    <ion-card-content>
-      <h2>Temperature: {{ weatherData.temperature_2m }}°C</h2>
-      <p>Humidity: {{ weatherData.relative_humidity_2m }}%</p>
-      <p>Wind: {{ weatherData.wind_speed_10m }} km/h</p>
-      <p>Condition: {{ weatherCondition }}</p>
-    </ion-card-content>
-  </ion-card>
+      <p
+        *ngIf="errorMessage"
+        class="error-message"
+        role="alert"
+        aria-live="assertive">
+        {{ errorMessage }}
+      </p>
+    </section>
 
+    <ion-card class="weather-card" *ngIf="weatherData && location">
+      <ion-card-header>
+        <p class="location-label">Current weather</p>
+        <ion-card-title>{{ location.name }}, {{ location.country }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="current-condition">
+          <ion-icon name="partly-sunny-outline" aria-hidden="true"></ion-icon>
+          <div>
+            <p class="temperature">{{ weatherData.temperature_2m }}°</p>
+            <p class="condition">{{ weatherCondition }}</p>
+          </div>
+        </div>
+
+        <div class="weather-details">
+          <div class="detail">
+            <span>Humidity</span>
+            <strong>{{ weatherData.relative_humidity_2m }}%</strong>
+          </div>
+          <div class="detail">
+            <span>Wind speed</span>
+            <strong>{{ weatherData.wind_speed_10m }} km/h</strong>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </main>
 </ion-content>
