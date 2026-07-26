@@ -14,11 +14,10 @@ Weather App is a focused Ionic and Angular demo that searches for a city and dis
 
 ## Technology stack
 
-- Ionic 7.2
+- Ionic 8
 - Angular 20 with standalone components
 - TypeScript and SCSS
 - Angular HttpClient and RxJS
-- Capacitor
 - Open-Meteo APIs
 
 Ionic supplies the mobile-friendly interface components and application shell. Angular supplies component state, templates, dependency injection, routing, forms, and HTTP communication.
