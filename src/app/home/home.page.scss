@@ -1,27 +1,167 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+:host {
+  --blue: #075aa8;
+  --dark-blue: #063d73;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.app-header ion-toolbar {
+  --background: linear-gradient(135deg, var(--dark-blue), var(--blue));
+  --color: #fff;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.search-button {
+  font-weight: 700;
+}
 
-  color: #8c8c8c;
+ion-content {
+  --background: linear-gradient(#e5f4ff, #fff);
+}
 
+.weather-page {
+  max-width: 680px;
+  margin: auto;
+  padding: 32px 16px 48px;
+  color: #172b3a;
+}
+
+.intro,
+.current-condition,
+.status-message {
+  display: flex;
+  align-items: center;
+}
+
+.intro {
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.intro > ion-icon {
+  color: var(--blue);
+  font-size: 40px;
+}
+
+.intro h1 {
+  margin: 0 0 4px;
+  color: var(--dark-blue);
+  font-size: clamp(1.65rem, 6vw, 2.25rem);
+}
+
+.intro p,
+.location-label {
+  margin: 0;
+  color: #496477;
+}
+
+.search-panel,
+.weather-card {
+  border: 1px solid #c7e1f5;
+  background: #fff;
+}
+
+.search-panel {
+  padding: 18px;
+  border-radius: 20px;
+}
+
+ion-searchbar {
+  --background: #f4f9fd;
+  --border-radius: 12px;
+  --box-shadow: none;
+  --color: #172b3a;
+  --icon-color: var(--blue);
+  padding: 0 0 12px;
+}
+
+ion-searchbar:focus-within,
+.search-button:focus-visible {
+  outline: 3px solid #f0b429;
+  outline-offset: 3px;
+}
+
+.search-button {
+  --background: var(--blue);
+  --border-radius: 12px;
+  min-height: 46px;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+.status-message,
+.error-message {
+  margin: 14px 2px 0;
+}
+
+.status-message {
+  justify-content: center;
+  gap: 10px;
+  color: var(--dark-blue);
+}
+
+.error-message {
+  padding: 11px 13px;
+  border-left: 4px solid #b42318;
+  background: #fff1f0;
+  color: #791f18;
+}
+
+.weather-card {
+  margin: 24px 0 0;
+  border-radius: 22px;
+}
+
+.weather-card ion-card-title,
+.temperature {
+  color: var(--dark-blue);
+  font-weight: 800;
+}
+
+.weather-card ion-card-content {
+  padding: 12px 22px 24px;
+}
+
+.location-label {
+  font-weight: 700;
+}
+
+.current-condition {
+  gap: 18px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #e9f5ff;
+}
+
+.current-condition ion-icon {
+  color: var(--blue);
+  font-size: 4rem;
+}
+
+.temperature {
+  margin: 0;
+  font-size: clamp(3rem, 14vw, 4.75rem);
+  line-height: 1;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.detail {
+  display: grid;
+  gap: 5px;
+  padding: 16px;
+  border: 1px solid #d8e8f3;
+  border-radius: 14px;
+  color: var(--dark-blue);
+}
+
+.detail span {
+  color: #496477;
+}
+
+@media (max-width: 420px) {
+  .weather-details {
+    grid-template-columns: 1fr;
+  }
 }

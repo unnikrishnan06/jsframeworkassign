@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { EMPTY, finalize, map, switchMap } from 'rxjs';
 import {
   IonHeader,
   IonToolbar,
@@ -10,10 +12,18 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
+  IonIcon,
+  IonSpinner,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { partlySunnyOutline } from 'ionicons/icons';
 
-import { Weather } from '../services/weather';
+import {
+  CurrentWeather,
+  GeocodingResult,
+  Weather,
+} from '../services/weather';
 
 @Component({
   selector: 'app-home',
@@ -29,21 +39,95 @@ import { Weather } from '../services/weather';
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
+    IonCardContent,
+    IonIcon,
+    IonSpinner,
+    FormsModule,
+    NgIf,
   ],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+  private readonly weather = inject(Weather);
 
-  weatherData: any;
+  city = 'Toronto';
+  location?: GeocodingResult;
+  weatherData?: CurrentWeather;
+  isLoading = false;
+  errorMessage = '';
 
-  constructor(private weather: Weather) {}
+  constructor() {
+    addIcons({ partlySunnyOutline });
+  }
 
-  loadWeather() {
+  ngOnInit(): void {
+    this.loadWeather();
+  }
 
-    this.weather.getWeather(43.6532, -79.3832).subscribe((data) => {
-      console.log(data);
-      this.weatherData = data.current;
+  loadWeather(): void {
+    if (this.isLoading) {
+      return;
+    }
+
+    const city = this.city.trim();
+    if (!city) {
+      this.errorMessage = 'Please enter a city name.';
+      return;
+    }
+
+    this.errorMessage = '';
+    this.isLoading = true;
+
+    this.weather.searchCity(city).pipe(
+      switchMap((geocodingData) => {
+        const location = geocodingData.results?.[0];
+        if (!location) {
+          this.errorMessage = `We couldn't find "${city}". Please try another city.`;
+          return EMPTY;
+        }
+
+        return this.weather.getWeather(location.latitude, location.longitude).pipe(
+          map((weatherData) => ({
+            location,
+            currentWeather: weatherData.current,
+          })),
+        );
+      }),
+      finalize(() => {
+        this.isLoading = false;
+      }),
+    ).subscribe({
+      next: ({ location, currentWeather }) => {
+        this.location = location;
+        this.weatherData = currentWeather;
+      },
+      error: () => {
+        this.errorMessage = 'Weather data is unavailable right now. Please check your connection and try again.';
+      },
     });
   }
 
+  get weatherCondition(): string {
+    const code = this.weatherData?.weather_code;
+
+    if (code === 0) {
+      return 'Clear';
+    }
+    if (code === 1 || code === 2 || code === 3) {
+      return 'Cloudy';
+    }
+    if (code === 45 || code === 48) {
+      return 'Fog';
+    }
+    if (code !== undefined && ((code >= 51 && code <= 67) || (code >= 80 && code <= 82))) {
+      return 'Rain';
+    }
+    if (code !== undefined && ((code >= 71 && code <= 77) || code === 85 || code === 86)) {
+      return 'Snow';
+    }
+    if (code !== undefined && code >= 95 && code <= 99) {
+      return 'Thunderstorm';
+    }
+
+    return 'Cloudy';
+  }
 }
