@@ -1,20 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Weather App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-searchbar
+    placeholder="Search for a city">
+  </ion-searchbar>
+
+  <ion-button expand="block">
+    Search
+  </ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Toronto</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h2>🌡 24°C</h2>
+      <p>☁ Cloudy</p>
+      <p>💧 Humidity: 60%</p>
+      <p>🌬 Wind: 15 km/h</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
