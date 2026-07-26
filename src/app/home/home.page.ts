@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EMPTY, finalize, map, switchMap } from 'rxjs';
@@ -47,13 +47,15 @@ import {
   ],
 })
 export class HomePage implements OnInit {
+  private readonly weather = inject(Weather);
+
   city = 'Toronto';
   location?: GeocodingResult;
   weatherData?: CurrentWeather;
   isLoading = false;
   errorMessage = '';
 
-  constructor(private weather: Weather) {
+  constructor() {
     addIcons({ partlySunnyOutline });
   }
 

@@ -1,103 +1,88 @@
 :host {
-  --weather-blue: #075aa8;
-  --weather-blue-dark: #063d73;
-  --weather-blue-light: #e9f5ff;
-  --weather-text: #172b3a;
+  --blue: #075aa8;
+  --dark-blue: #063d73;
 }
 
-.app-header {
-  box-shadow: 0 2px 14px rgba(6, 61, 115, 0.2);
+.app-header ion-toolbar {
+  --background: linear-gradient(135deg, var(--dark-blue), var(--blue));
+  --color: #fff;
+}
 
-  ion-toolbar {
-    --background: linear-gradient(135deg, var(--weather-blue-dark), var(--weather-blue));
-    --color: #ffffff;
-    --min-height: 64px;
-  }
-
-  ion-title {
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
+.search-button {
+  font-weight: 700;
 }
 
 ion-content {
-  --background: linear-gradient(180deg, #e5f4ff 0%, #f7fbff 55%, #ffffff 100%);
+  --background: linear-gradient(#e5f4ff, #fff);
 }
 
 .weather-page {
-  width: min(100% - 32px, 680px);
-  margin: 0 auto;
-  padding: 32px 0 48px;
-  color: var(--weather-text);
+  max-width: 680px;
+  margin: auto;
+  padding: 32px 16px 48px;
+  color: #172b3a;
+}
+
+.intro,
+.current-condition,
+.status-message {
+  display: flex;
+  align-items: center;
 }
 
 .intro {
-  display: flex;
-  align-items: center;
   gap: 16px;
   margin-bottom: 24px;
+}
 
-  > ion-icon {
-    flex: 0 0 auto;
-    padding: 12px;
-    border-radius: 18px;
-    background: #ffffff;
-    color: var(--weather-blue);
-    font-size: 40px;
-    box-shadow: 0 8px 24px rgba(7, 90, 168, 0.12);
-  }
+.intro > ion-icon {
+  color: var(--blue);
+  font-size: 40px;
+}
 
-  h1 {
-    margin: 0 0 4px;
-    color: var(--weather-blue-dark);
-    font-size: clamp(1.65rem, 6vw, 2.25rem);
-    font-weight: 750;
-  }
+.intro h1 {
+  margin: 0 0 4px;
+  color: var(--dark-blue);
+  font-size: clamp(1.65rem, 6vw, 2.25rem);
+}
 
-  p {
-    margin: 0;
-    color: #3c5568;
-    line-height: 1.5;
-  }
+.intro p,
+.location-label {
+  margin: 0;
+  color: #496477;
+}
+
+.search-panel,
+.weather-card {
+  border: 1px solid #c7e1f5;
+  background: #fff;
 }
 
 .search-panel {
   padding: 18px;
-  border: 1px solid #c7e1f5;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 10px 30px rgba(6, 61, 115, 0.1);
 }
 
 ion-searchbar {
   --background: #f4f9fd;
   --border-radius: 12px;
   --box-shadow: none;
-  --color: var(--weather-text);
-  --icon-color: var(--weather-blue);
-  --placeholder-color: #587083;
+  --color: #172b3a;
+  --icon-color: var(--blue);
   padding: 0 0 12px;
 }
 
-ion-searchbar:focus-within {
-  outline: 3px solid rgba(7, 90, 168, 0.32);
-  outline-offset: 2px;
-  border-radius: 14px;
-}
-
-.search-button {
-  --background: var(--weather-blue);
-  --background-hover: var(--weather-blue-dark);
-  --border-radius: 12px;
-  --box-shadow: none;
-  min-height: 46px;
-  margin: 0;
-  font-weight: 700;
-}
-
+ion-searchbar:focus-within,
 .search-button:focus-visible {
   outline: 3px solid #f0b429;
   outline-offset: 3px;
+}
+
+.search-button {
+  --background: var(--blue);
+  --border-radius: 12px;
+  min-height: 46px;
+  margin: 0;
 }
 
 .status-message,
@@ -106,131 +91,76 @@ ion-searchbar:focus-within {
 }
 
 .status-message {
-  display: flex;
-  align-items: center;
   justify-content: center;
   gap: 10px;
-  color: var(--weather-blue-dark);
-  font-weight: 600;
-
-  ion-spinner {
-    width: 22px;
-    height: 22px;
-  }
+  color: var(--dark-blue);
 }
 
 .error-message {
   padding: 11px 13px;
   border-left: 4px solid #b42318;
-  border-radius: 8px;
   background: #fff1f0;
   color: #791f18;
-  line-height: 1.45;
 }
 
 .weather-card {
   margin: 24px 0 0;
-  border: 1px solid #c7e1f5;
   border-radius: 22px;
-  background: #ffffff;
-  box-shadow: 0 14px 36px rgba(6, 61, 115, 0.13);
-  overflow: hidden;
+}
 
-  ion-card-header {
-    padding: 22px 22px 10px;
-  }
+.weather-card ion-card-title,
+.temperature {
+  color: var(--dark-blue);
+  font-weight: 800;
+}
 
-  ion-card-title {
-    color: var(--weather-blue-dark);
-    font-size: clamp(1.35rem, 5vw, 1.8rem);
-    font-weight: 750;
-  }
-
-  ion-card-content {
-    padding: 12px 22px 24px;
-  }
+.weather-card ion-card-content {
+  padding: 12px 22px 24px;
 }
 
 .location-label {
-  margin: 0 0 5px;
-  color: #496477;
-  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .current-condition {
-  display: flex;
-  align-items: center;
   gap: 18px;
   padding: 20px;
   border-radius: 18px;
-  background: var(--weather-blue-light);
+  background: #e9f5ff;
+}
 
-  ion-icon {
-    color: var(--weather-blue);
-    font-size: clamp(3rem, 13vw, 4.5rem);
-  }
+.current-condition ion-icon {
+  color: var(--blue);
+  font-size: 4rem;
 }
 
 .temperature {
   margin: 0;
-  color: var(--weather-blue-dark);
   font-size: clamp(3rem, 14vw, 4.75rem);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.95;
-}
-
-.condition {
-  margin: 8px 0 0;
-  color: #31566f;
-  font-size: 1.05rem;
-  font-weight: 650;
+  line-height: 1;
 }
 
 .weather-details {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 16px;
 }
 
 .detail {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 5px;
   padding: 16px;
   border: 1px solid #d8e8f3;
   border-radius: 14px;
-  background: #f8fbfe;
+  color: var(--dark-blue);
+}
 
-  span {
-    color: #496477;
-    font-size: 0.86rem;
-  }
-
-  strong {
-    color: var(--weather-blue-dark);
-    font-size: 1.08rem;
-  }
+.detail span {
+  color: #496477;
 }
 
 @media (max-width: 420px) {
-  .weather-page {
-    width: min(100% - 24px, 680px);
-    padding-top: 24px;
-  }
-
-  .intro {
-    align-items: flex-start;
-  }
-
-  .search-panel {
-    padding: 14px;
-  }
-
   .weather-details {
     grid-template-columns: 1fr;
   }
