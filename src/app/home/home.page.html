@@ -7,22 +7,25 @@
 <ion-content class="ion-padding">
 
   <ion-searchbar
-    placeholder="Search for a city">
+    placeholder="Search for a city"
+    [(ngModel)]="city"
+    (keyup.enter)="loadWeather()">
   </ion-searchbar>
 
   <ion-button expand="block" (click)="loadWeather()">
     Search
   </ion-button>
 
-  <ion-card *ngIf="weatherData">
+  <ion-card *ngIf="weatherData && location">
     <ion-card-header>
-      <ion-card-title>Toronto</ion-card-title>
+      <ion-card-title>{{ location.name }}, {{ location.country }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <h2>🌡 {{ weatherData.temperature_2m }}°C</h2>
-      <p>💧 Humidity: {{ weatherData.relative_humidity_2m }}%</p>
-      <p>🌬 Wind: {{ weatherData.wind_speed_10m }} km/h</p>
+      <h2>Temperature: {{ weatherData.temperature_2m }}°C</h2>
+      <p>Humidity: {{ weatherData.relative_humidity_2m }}%</p>
+      <p>Wind: {{ weatherData.wind_speed_10m }} km/h</p>
+      <p>Condition: {{ weatherCondition }}</p>
     </ion-card-content>
   </ion-card>
 
