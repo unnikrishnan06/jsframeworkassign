@@ -38,7 +38,7 @@ Weather and location data are provided by [Open-Meteo](https://open-meteo.com/).
 ## Setup
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/unnikrishnan06/jsframeworkassign
 cd jsframeworkassign
 npm install
 ionic serve
@@ -114,7 +114,7 @@ The search controls have accessible labels and visible keyboard focus. Loading u
 
 ## Deployment
 
-Future live URL: `https://ionic-weather-app.onrender.com/home`
+live URL: `https://ionic-weather-app.onrender.com/home`
 
 # In-Class Exercise 
 
