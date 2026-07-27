@@ -116,6 +116,134 @@ The search controls have accessible labels and visible keyboard focus. Loading u
 
 Future live URL: `https://ionic-weather-app.onrender.com/home`
 
+# In-Class Exercise 
+
+
+
+## Objective
+
+Create a simple search interface using **IonSearchbar** and **IonButton**.
+
+
+
+---
+
+
+
+## Step 1: Open the Project
+
+
+
+```bash
+
+cd myApp
+
+```
+
+
+
+---
+
+
+
+## Step 2: Run the Application
+
+
+
+```bash
+
+ionic serve
+
+```
+
+
+
+---
+
+
+
+## Step 3: Open the File
+
+
+
+Open:
+
+
+
+```text
+
+src/app/home/home.page.html
+
+```
+
+
+
+---
+
+
+
+## Step 4: Add an IonSearchbar
+
+
+
+```html
+
+<ion-searchbar
+
+  placeholder="Enter a city">
+
+</ion-searchbar>
+
+```
+
+
+
+---
+
+
+
+## Step 5: Add an IonButton
+
+
+
+```html
+
+<ion-button expand="block">
+
+  Search
+
+</ion-button>
+
+```
+
+
+
+---
+
+
+
+## Step 6: Save the File
+
+
+
+Save the file and the application will reload automatically.
+
+
+
+---
+
+
+
+## Expected Output 
+
+
+
+- A search bar is displayed.
+
+- A **Search** button appears below the search bar.
+
+- You can type text into the search bar.
+
 ## Team
 
 - Team member 1: `Alen Thomas`
